@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
+  - Soul
+  - Grave
   layers:
   - Default
   - TransparentFX
@@ -14,7 +16,7 @@ TagManager:
   - UI
   - Ground
   - Player
-  - 
+  - Soul
   - 
   - 
   - 
@@ -41,6 +43,18 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3618292751
+    locked: 0
+  - name: BGObjects
+    uniqueID: 1006854693
+    locked: 0
+  - name: Player
+    uniqueID: 1370829199
+    locked: 0
+  - name: FGObjects
+    uniqueID: 740784723
     locked: 0
   m_RenderingLayers:
   - Default
