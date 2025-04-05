@@ -1,4 +1,3 @@
-using System;
 using Controllers;
 using UnityEngine;
 
@@ -14,12 +13,20 @@ public class Player : MonoBehaviour {
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckRadius = 0.2f;
     [SerializeField] private LayerMask groundLayer;
-
+    
+    [Header("Dirt")]
     [SerializeField] private GameObject dirtPile;
     [SerializeField] private Transform dirtLocation;
-
     public bool canDig;
-    
+
+    [Header("Scale")]
+    [SerializeField] private float maxSoulWeight = 100f; // adjust this to your design
+    [SerializeField] private GameObject scale;
+    [SerializeField] private GameObject scaleMarker;
+    public bool scaleOn;
+
+    public int soulWeight;
+    public bool talkToWitch;
     private Animator anim;
     private Rigidbody2D rb;
     private bool isGrounded;
@@ -46,11 +53,16 @@ public class Player : MonoBehaviour {
         // Jumping
         if (Input.GetButtonDown("Jump") && isGrounded && !isDigging && canDig) {
             isDigging = true;
-            // rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpForce);
+            rb.linearVelocity = new Vector2(0f, rb.linearVelocity.y);
             // ReSharper disable once Unity.UnknownAnimatorStateName
             anim.Play("dig");
             Invoke(nameof(EndDig), 1f);
             return;
+        }
+
+        if (Input.GetButtonDown("Jump") && isGrounded && talkToWitch) {
+            Debug.Log("Talking to the Witch");
+            HandInSouls();
         }
 
         if (isDigging) return;
@@ -69,6 +81,22 @@ public class Player : MonoBehaviour {
             Debug.Log(LevelController.soulWeight);
         }
     }
+    private void HandInSouls() {
+        // Clamp soulWeight to avoid going out of bounds
+        soulWeight = Mathf.Clamp(soulWeight, 0, (int)maxSoulWeight);
+
+        // Normalize soulWeight to [0, 1]
+        float weightPercentage = soulWeight / maxSoulWeight;
+        Debug.Log(weightPercentage);
+
+        // Map weightPercentage to [-4, 4]
+        float xPos = Mathf.Lerp(-4f, 4f, weightPercentage);
+
+        // Apply to position
+        Vector3 pos = scaleMarker.transform.position;
+        pos.x += xPos;
+        scaleMarker.transform.position = pos;
+    }
 
     private void OnTriggerEnter2D(Collider2D _other) {
         if (_other.CompareTag("Grave")) {
@@ -78,6 +106,11 @@ public class Player : MonoBehaviour {
                 currentGrave = grave;
             }
         }
+    }
+
+    public void ScaleOn() {
+        scaleOn = !scaleOn;
+        scale.SetActive(scaleOn);
     }
 
     private void EndDig() {

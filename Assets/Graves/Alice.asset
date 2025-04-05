@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 98fee1612ec74584870e470c4cec78a4, type: 3}
-  m_Name: Geoff
+  m_Name: Alice
   m_EditorClassIdentifier: 
   descriptionLines:
-  - Geoff
-  - 46
-  - Badass
-  weight: 50
+  - Alice Walker
+  - 'Age: 45'
+  - Her touch soothed pain, her remedies healed all.
+  weight: 10
