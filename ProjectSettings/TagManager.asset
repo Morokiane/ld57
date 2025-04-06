@@ -55,5 +55,8 @@ TagManager:
   - name: FGObjects
     uniqueID: 740784723
     locked: 0
+  - name: HUD
+    uniqueID: 1689713343
+    locked: 0
   m_RenderingLayers:
   - Default

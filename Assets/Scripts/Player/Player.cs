@@ -7,14 +7,15 @@ namespace Player {
     public class Player : MonoBehaviour {
         public static Player instance;
 
-        [SerializeField] private int playerHP;
+        public float playerHP { get; private set; } = 1;
         [SerializeField] private Sprite playerGhost;
         [SerializeField] private Sprite playerNormal;
         public bool takeDamage { get; private set; } = true;
 
         [HideInInspector] public PlayerMovement playerMovement;
         
-        private int currentHP;
+        public float currentHP { get; private set; }
+        public float currentDepth;
 
         private CircleCollider2D circleCollider2D;
         private SpriteRenderer spriteRenderer;
@@ -33,12 +34,12 @@ namespace Player {
             currentHP = playerHP;
         }
 
-        public void TakeDamage(int _damage) {
+        public void TakeDamage(float _damage) {
             if (takeDamage) { 
                 currentHP -= _damage;
                     // SoundFXController.instance.PlaySoundFXClip(playerHit, transform, 1f);
             }
-            // HUDController.instance.PlayerHp();
+            HUDController.instance.PlayerHP();
             
             if (currentHP <= 0 && !LevelController.playerDead) {
                 // Instantiate(explode, transform.position, Quaternion.identity);
