@@ -47,7 +47,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42358ac042d343dca271fece57d0d6ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 0.1
+  damage: 0.2
+  explosion: {fileID: 1470362925346372938, guid: 72412e5751475496fa3d3191b9522548, type: 3}
 --- !u!114 &8890352259039045611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,5 +169,5 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5653621
+  m_Offset: {x: 0.03261751, y: 0.02609396}
+  m_Radius: 0.47729498

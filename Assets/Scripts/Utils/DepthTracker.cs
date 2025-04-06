@@ -1,3 +1,4 @@
+using Controllers;
 using UnityEngine;
 
 namespace Utils {
@@ -10,9 +11,11 @@ namespace Utils {
         }
 
         private void FixedUpdate() {
-            MoveDown();  // Call without passing pos since it's now a class variable
+            if (!LevelController.playerDead) {
+                MoveDown(); // Call without passing pos since it's now a class variable}
+            }
         }
-
+        
         private void MoveDown() {
             pos.y -= Player.Player.instance.playerMovement.moveSpeed * Time.fixedDeltaTime;
             transform.position = pos;  // Apply the updated position

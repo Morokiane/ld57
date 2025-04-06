@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
 
 namespace Controllers {
     public class LevelController : MonoBehaviour {
-[Header("Game Objects")]
+        public static LevelController instance;
+        [Header("Game Objects")]
         [SerializeField] private GameObject player;
 
         [Header("Wave Settings")]
@@ -16,14 +19,13 @@ namespace Controllers {
 
         [Header("Time Settings")] 
         [SerializeField] private bool countdownTimer;
-        [SerializeField] private float spawnWait;
+        public float spawnWait;
         [SerializeField] private float startWait;
 
         private PoolController poolController;
         private List<string> enemyTags = new List<string>();
         private int waveCount;
 
-        [HideInInspector] public static int numOfEnemiesKilled;
         [HideInInspector] public static bool playerDead;
 
         private void Awake() {
@@ -31,6 +33,7 @@ namespace Controllers {
         }
 
         private void Start() {
+            instance = this;
             poolController = PoolController.instance;
 
             // Grab all enemy tags from PoolController that start with "Enemy"
@@ -49,13 +52,24 @@ namespace Controllers {
             StartCoroutine(EnemyWaves());
         }
 
+        private void Update() {
+            if (Input.GetButtonDown("Cancel")) {
+                SceneManager.LoadScene("Title");
+            }
+        }
+
+        public static IEnumerator GameOver() {
+            Player.Player.instance.gameObject.SetActive(false);
+            yield return new WaitForSeconds(1);
+        }
+
         private IEnumerator EnemyWaves() {
             yield return new WaitForSeconds(startWait);
 
             for (int wave = 0; wave < totalWaves; wave++) {
                 for (int i = 0; i < enemyCount; i++) {
                     // Vector2 randomSpawnPos = new Vector2(spawnPosition.x, Random.Range(-spawnPosition.x, spawnPosition.x));
-                    Vector2 randomSpawnPos = new Vector2(Random.Range(-4f, 4f), -6f);
+                    Vector2 randomSpawnPos = new Vector2(Random.Range(-5f, 5f), -6f);
                     string randomTag = enemyTags[Random.Range(0, enemyTags.Count)];
 
                     GameObject enemy = poolController.SpawnFromPool(randomTag, randomSpawnPos, Quaternion.identity);

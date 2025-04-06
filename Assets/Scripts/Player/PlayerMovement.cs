@@ -47,11 +47,11 @@ namespace Player {
         void UpdateSprite() {
             float moveX = Input.GetAxisRaw("Horizontal");
 
-            if (moveX < 0) {
+            if (moveX < 0 && Player.instance.takeDamage) {
                 spriteRenderer.sprite = gauche;
-            } else if (moveX > 0) {
+            } else if (moveX > 0 && Player.instance.takeDamage) {
                 spriteRenderer.sprite = droit;
-            } else {
+            } else if (Player.instance.takeDamage) {
                 spriteRenderer.sprite = centre;
             }
         }

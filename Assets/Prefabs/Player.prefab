@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2656048608804656336}
   - component: {fileID: 2734970999789862877}
   - component: {fileID: 6494505430066619366}
+  - component: {fileID: 2739629976066885883}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -47,6 +48,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f53ad857cbab4ed1aeedcafa38f97931, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerGhost: {fileID: 4070147975249816555, guid: e9195a016ef8a4cb4ad7328996f617a2, type: 3}
+  playerNormal: {fileID: 1099062414, guid: d1ba14fa89ae3434988ac972aeb2b221, type: 3}
+  explosion: {fileID: 3563231716290004288, guid: f68bc61b56fbe4c5299fddddfc46e8d7, type: 3}
+  playerMovement: {fileID: 0}
+  currentDepth: 0
 --- !u!114 &2656048608804656336
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -59,11 +65,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 56e1a27661f3049ae88b6cc443c2bead, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerMovementType: 0
-  flashLight: {fileID: 0}
-  isMoving: 0
-  moveSpeed: 0
-  freeAimMovementSpeed: 2
+  moveSpeed: 5
+  minBound: {x: -5, y: -4}
+  maxBound: {x: 5, y: 3}
+  gauche: {fileID: -2311659948842064771, guid: d1ba14fa89ae3434988ac972aeb2b221, type: 3}
+  centre: {fileID: 1099062414, guid: d1ba14fa89ae3434988ac972aeb2b221, type: 3}
+  droit: {fileID: -246350904, guid: d1ba14fa89ae3434988ac972aeb2b221, type: 3}
 --- !u!212 &2734970999789862877
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -108,12 +115,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d1ba14fa89ae3434988ac972aeb2b221, type: 3}
+  m_Sprite: {fileID: 1099062414, guid: d1ba14fa89ae3434988ac972aeb2b221, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 1.5625, y: 1.75}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -134,7 +141,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDamping: 0
   m_AngularDamping: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -145,4 +152,40 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
+--- !u!58 &2739629976066885883
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4834430053900634643}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Radius: 0.48841444
