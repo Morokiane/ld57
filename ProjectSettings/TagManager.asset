@@ -5,9 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Ground
-  - Soul
-  - Grave
-  - Trigger
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -17,8 +15,8 @@ TagManager:
   - UI
   - Ground
   - Player
-  - Soul
-  - Trigger
+  - Enemy
+  - 
   - 
   - 
   - 
